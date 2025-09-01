@@ -1,4 +1,6 @@
-﻿namespace CastleWpf;
+﻿using CastleWpf.NodeRed;
+
+namespace CastleWpf;
 
 internal static class Services
 {

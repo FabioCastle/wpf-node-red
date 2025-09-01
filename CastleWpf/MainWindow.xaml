@@ -7,12 +7,32 @@
         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
         Title="Castle App" Height="720" Width="1080">
-    <Grid>
-        <wv2:WebView2 x:Name="NodeRedWebView" d:Visibility="Collapsed"/>
 
-        <StackPanel x:Name="LoadingPanel" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-            <TextBlock Text="Caricamento..." FontSize="18" HorizontalAlignment="Center"/>
-            <ProgressBar IsIndeterminate="True" Margin="60,10"/>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
+            <Button Click="NavigateHome">
+                Home
+            </Button>
+            <Button Click="NavigateNodeRed">
+                Node-RED
+            </Button>
         </StackPanel>
+
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Column="1"/>
     </Grid>
 </Window>

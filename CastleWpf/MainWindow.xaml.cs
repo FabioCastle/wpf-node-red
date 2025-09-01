@@ -1,4 +1,5 @@
-﻿using Microsoft.Web.WebView2.Core;
+﻿using CastleWpf.Core;
+using CastleWpf.NodeRed;
 using System.Windows;
 
 namespace CastleWpf;
@@ -8,31 +9,26 @@ namespace CastleWpf;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private readonly ManualResetEventSlim _viewLoaded = new(false);
+    private readonly DataProviderPage _providerPage = new();
+    private readonly NodeRedPage _nodeRedPage = new();
 
     public MainWindow()
     {
         InitializeComponent();
         
-        Loaded += WaitForNodeRed;
+        Loaded += (s, e) =>
+        {
+            MainFrame.Navigate(_providerPage);
+        };
     }
 
-    private async void WaitForNodeRed(object sender, RoutedEventArgs e)
+    private void NavigateHome(object sender, RoutedEventArgs e)
     {
-        _viewLoaded.Reset();
-
-        await Services.NodeRedManager.WaitForNodeReadReadyAsync();
-
-        NodeRedWebView.Source = new Uri("http://127.0.0.1:1880");
-        NodeRedWebView.NavigationCompleted += OnNavigationCompleted;
-
-        await Task.Run(_viewLoaded.Wait);
-        LoadingPanel.Visibility = Visibility.Collapsed;
+        MainFrame.Navigate(_providerPage);
     }
 
-    private void OnNavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e)
+    private void NavigateNodeRed(object sender, RoutedEventArgs e)
     {
-        _viewLoaded.Set();
-        NodeRedWebView.NavigationCompleted -= OnNavigationCompleted;
+        MainFrame.Navigate(_nodeRedPage);
     }
 }

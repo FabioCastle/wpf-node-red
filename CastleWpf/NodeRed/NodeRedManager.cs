@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace CastleWpf;
+namespace CastleWpf.NodeRed;
 
 internal class NodeRedManager
 {
