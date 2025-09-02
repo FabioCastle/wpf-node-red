@@ -1,6 +1,6 @@
 # WPF Node-RED
 
-Proof of concept of having a WPF application that embeddes a Node-RED installation.
+Proof of concept for a WPF application that embeddes a Node-RED installation.
 
 The idea is to build a WPF application that has standard features among every installation (the "core"), while every instance of the app can have custom logics provided by Node-RED flows.
 This separates the core product development from client-specific requirements and enables the addition of new features after the installation without having a new build.
@@ -12,18 +12,20 @@ In the proposed architecture, you should:
 Of course, you should set the boundary between the core and the custom logic as there is no single right way to do it.
 
 ## Features
-This is a work-in-progress project. Up to now you can see:
-- A single page WPF application that shows a loading message until Node-RED is ready to be used. Node-RED server is launched as a child process and the embedding is performed via WebView2.
+This is a work-in-progress project. Up to now you can see a WPF application that provides the following:
+- A home page that handles "core" features.
+- A page that embeddes the Node-RED editor. The Node-RED server is launched as a child process and the embedding is performed via WebView2.
 
-Please notice that on my PC it requires up to 20 seconds to load. This time is required by WebView2 to load everything that is required to display the Node-RED website. I will try to hide the loading time by have a welcome page and having the loading in the background.
+The Node-RED page shows a loading message until the editor is ready. Please notice that on my PC it requires up to 20 seconds to load. This time is required by WebView2 to load everything that is required to display the Node-RED website. I will try to hide the loading time by have a welcome page and having the loading in the background.
 
 ## Why this matters
 I had this idea working on an application aimed at controlling industrial production plants.
-In this field you often need to monitor the change in a signal on some equipment that should enable some other signal based on some condition.
-Since plants are usually composed of a specific set of machines you often re-use the same .NET objects to read and write data on them.
-However, every plant may have a custom logic that requires you to change the code in order to handle it, making challenging if not impossible to re-use the same project for every customer.
-Also, having an event-based architecture in .NET is feasible but has some limitations regaring the readability of the codebase and difficulties in debug.
-This new architecture should enable me to have a single core application that integrates the machines, while writing event-based custom logic in Node-RED.
+In this field you often work with equipment that support vendor specific communication protocol to share data and commands, and usually there are .NET libraries to handle the communication.
+So my idea was to have "core" objects to handle the communication with different machines, robots, vision systems, and so on.
+Every project developed for a customer would then use the ones needed by the specific production plant integrating them as required.
+The problem I usually faced, however, was that every plant have a different control logic and every customer has different requirements in terms of how to use the data retrieved from the plant.
+So it is challenging if not impossible to re-use the same project for every customer, and maintaining many active projects that shares common features is challenging on its own.
+This new architecture should enable me to have a single core application that integrates the industrial equipment and provides the UI, while writing event-based custom logic in Node-RED to handle data and commands.
 
 ## Clone the repo
 After cloning the repository, go to the `Runtime` folder and install the Node.js dependencies:
