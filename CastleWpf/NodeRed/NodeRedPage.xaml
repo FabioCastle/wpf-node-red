@@ -12,7 +12,7 @@
         <wv2:WebView2 x:Name="NodeRedWebView" d:Visibility="Collapsed"/>
 
         <StackPanel x:Name="LoadingPanel" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-            <TextBlock Text="Caricamento..." FontSize="18" HorizontalAlignment="Center"/>
+            <TextBlock Text="Loading Node-RED..." FontSize="18" HorizontalAlignment="Center"/>
             <ProgressBar IsIndeterminate="True" Margin="60,10"/>
         </StackPanel>
     </Grid>
