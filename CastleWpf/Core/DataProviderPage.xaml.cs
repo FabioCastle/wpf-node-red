@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
 namespace CastleWpf.Core;
@@ -8,25 +8,28 @@ namespace CastleWpf.Core;
 /// </summary>
 public partial class DataProviderPage : Page
 {
-    private readonly DataProvider _provider = new();
+    public ObservableCollection<DataProvider> DataProviders { get; } = [];
+    private bool _dataProvidersRegistered = false;
 
     public DataProviderPage()
     {
         InitializeComponent();
 
+        DataProviders.Add(new DataProvider("OKUMA MULTUS U3000"));
+        DataProviders.Add(new DataProvider("OKUMA LB-300"));
+        DataProviders.Add(new DataProvider("SIEMENS S-7"));
+
         Loaded += (s, e) =>
         {
-            DataContext = _provider;
+            if (!_dataProvidersRegistered)
+            {
+                foreach (var dataProvider in DataProviders)
+                {
+                    Services.MqttService.Register(dataProvider);
+                }
+
+                _dataProvidersRegistered = true;
+            }
         };
-    }
-
-    private void RefreshIntValue(object sender, RoutedEventArgs e)
-    {
-        _provider.RefreshIntValue();
-    }
-
-    private void RefreshStringValue(object sender, RoutedEventArgs e)
-    {
-        _provider.RefreshStringValue();
     }
 }

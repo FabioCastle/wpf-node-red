@@ -2,7 +2,7 @@
 
 namespace CastleWpf.NodeRed;
 
-internal class NodeRedManager
+internal class NodeRedService
 {
     private Process? _nodeRedProcess;
     private readonly ManualResetEventSlim _nodeRedStarted = new(false);

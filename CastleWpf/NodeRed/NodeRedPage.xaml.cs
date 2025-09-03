@@ -18,7 +18,7 @@ public partial class NodeRedPage : Page
 
     private async void WaitForNodeRed(object sender, RoutedEventArgs e)
     {
-        await Services.NodeRedManager.WaitForNodeReadReadyAsync();
+        await Services.NodeRedService.WaitForNodeReadReadyAsync();
 
         NodeRedWebView.Source = new Uri("http://127.0.0.1:1880");
         NodeRedWebView.NavigationCompleted += OnNavigationCompleted;

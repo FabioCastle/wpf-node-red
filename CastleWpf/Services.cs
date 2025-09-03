@@ -1,8 +1,10 @@
-﻿using CastleWpf.NodeRed;
+﻿using CastleWpf.Mqtt;
+using CastleWpf.NodeRed;
 
 namespace CastleWpf;
 
 internal static class Services
 {
-    public static NodeRedManager NodeRedManager { get; } = new NodeRedManager();
+    public static NodeRedService NodeRedService { get; } = new NodeRedService();
+    public static CastleMqttService MqttService { get; } = new CastleMqttService();
 }

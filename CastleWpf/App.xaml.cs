@@ -11,13 +11,15 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        Services.NodeRedManager.StartNodeRed();
+        Services.NodeRedService.StartNodeRed();
+        Services.MqttService.StartMqttBroker();
     }
 
     protected override void OnExit(ExitEventArgs e)
     {
         base.OnExit(e);
 
-        Services.NodeRedManager.StopNodeRed();
+        Services.MqttService.StopMqttBroker();
+        Services.NodeRedService.StopNodeRed();
     }
 }

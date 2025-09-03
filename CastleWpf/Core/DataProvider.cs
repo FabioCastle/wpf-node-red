@@ -3,9 +3,25 @@ using System.Text;
 
 namespace CastleWpf.Core;
 
-internal class DataProvider : INotifyPropertyChanged
+public class DataProvider : INotifyPropertyChanged
 {
-    private int _intValue = GetRandomIntValue();
+    public string Name { get; }
+
+    public DataProvider()
+    {
+        Name = nameof(DataProvider);
+        _intValue = GetRandomIntValue();
+        _stringValue = GetRandomStringValue();
+    }
+
+    public DataProvider(string name)
+    {
+        Name = name;
+        _intValue = GetRandomIntValue();
+        _stringValue = GetRandomStringValue();
+    }
+
+    private int _intValue;
     public int IntValue
     {
         get => _intValue;
@@ -19,7 +35,7 @@ internal class DataProvider : INotifyPropertyChanged
         }
     }
 
-    private string _stringValue = GetRandomStringValue();
+    private string _stringValue;
     public string StringValue
     {
         get => _stringValue;
